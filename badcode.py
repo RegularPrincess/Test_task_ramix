@@ -69,6 +69,8 @@ def good_funny_function(data):
     if all_same or is_increase_for_1(data) or is_increase_for_1(revers_data):
         return 1
 
+
+# Улучшеную версию реализовал так, чтобы выводы обоих версий всегда совпадали, за исключением обработки ошибок
 data = ['1', '2', 3, 4]
 print('Good: ', good_funny_function(data))
 print('Bad: ', isFunnyFunction(data))
