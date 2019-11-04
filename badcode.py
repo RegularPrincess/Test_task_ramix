@@ -72,6 +72,6 @@ def good_funny_function(data):
 
 if __name__ == '__main__':
     # Улучшеную версию реализовал так, чтобы выводы обоих версий всегда совпадали, за исключением обработки ошибок
-    data = ['1', '2', 3, 4]
+    data = [1, '2', 'jk', 3] #['1']
     print('Good: ', good_funny_function(data))
     print('Bad: ', isFunnyFunction(data))
