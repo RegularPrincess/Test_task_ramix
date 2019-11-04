@@ -40,6 +40,9 @@ def fun3(a, *args, **kw):
     time.sleep(0.3)
     return 'fun3 finish'
 
-print(fun1(), '\n')
-print(fun2(42), '\n')
-print(fun3(42, 43, foo=2), '\n')
+
+if __name__ == '__main__':
+    print(fun1(), '\n')
+    print(fun2(42), '\n')
+    print(fun3(42, 43, foo=2), '\n')
+

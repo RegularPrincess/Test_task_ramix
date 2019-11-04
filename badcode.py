@@ -70,7 +70,8 @@ def good_funny_function(data):
         return 1
 
 
-# Улучшеную версию реализовал так, чтобы выводы обоих версий всегда совпадали, за исключением обработки ошибок
-data = ['1', '2', 3, 4]
-print('Good: ', good_funny_function(data))
-print('Bad: ', isFunnyFunction(data))
+if __name__ == '__main__':
+    # Улучшеную версию реализовал так, чтобы выводы обоих версий всегда совпадали, за исключением обработки ошибок
+    data = ['1', '2', 3, 4]
+    print('Good: ', good_funny_function(data))
+    print('Bad: ', isFunnyFunction(data))

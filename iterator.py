@@ -26,6 +26,7 @@ class MyIterator:
                 raise StopIteration
 
 
-m = MyIterator([1, 2, 3, 4, 5, 6, 7, 8], False)
-for e in m:
-    print(e)
+if __name__ == '__main__':
+    m = MyIterator([1, 2, 3, 4, 5, 6, 7, 8], False)
+    for e in m:
+        print(e)

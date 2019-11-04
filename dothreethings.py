@@ -37,15 +37,16 @@ def action():
     print('Done')
 
 
-pool = []
-doer = Doer()
-object_methods = [method_name for method_name in dir(doer)
-                  if '_' not in method_name and callable(getattr(doer, method_name))]
-for m in object_methods:
-    thread = threading.Thread(target=getattr(doer, m), args=(action,))
-    thread.start()
-    pool.append(thread)
-    time.sleep(0.5)
-for t in pool:
-    t.join()
+if __name__ == '__main__':
+    pool = []
+    doer = Doer()
+    object_methods = [method_name for method_name in dir(doer)
+                      if '_' not in method_name and callable(getattr(doer, method_name))]
+    for m in object_methods:
+        thread = threading.Thread(target=getattr(doer, m), args=(action,))
+        thread.start()
+        pool.append(thread)
+        time.sleep(0.5)
+    for t in pool:
+        t.join()
 
