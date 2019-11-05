@@ -2,6 +2,7 @@ import threading
 import time
 
 
+# in other branch You can find Doer implementation via condition and notify
 class Doer:
     def __init__(self):
         self.whos_turn = 1
