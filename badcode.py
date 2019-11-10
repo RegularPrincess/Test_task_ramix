@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
+from decorator import measure_time
+
+
+@measure_time
 def isFunnyFunction(data):
     """
     Возвращает 1, если передана последовательность одинаковых элементов
@@ -59,6 +63,7 @@ def is_increase_for_1(data):
 
 # is в названии предполагает, что функция что то проверяет и возвращает bool или другой бинарный результат
 # названия функций snake case-ом
+@measure_time
 def good_funny_function(data):
     if data is None:
         raise ValueError("data is None")
@@ -69,9 +74,37 @@ def good_funny_function(data):
     if all_same or is_increase_for_1(data) or is_increase_for_1(revers_data):
         return 1
 
+@measure_time
+def good_and_fast_funny_function(data):
+    if data is None:
+        raise ValueError("data is None")
+    if len(data) < 1:
+        raise ValueError("data is too short")
+    same = True
+    increase = True
+    decrease = True
+    try:
+        before = int(data[0])
+        for cur in data[1:]:
+            cur = int(cur)
+            dif = before - cur
+            if same and dif != 0:
+                same = False
+            elif increase and dif != -1:
+                increase = False
+            elif decrease and dif != 1:
+                decrease = False
+            if not (same or increase or decrease):
+                return False
+            before = cur
+    except ValueError:
+        return False
+    return True
+
 
 if __name__ == '__main__':
     # Улучшеную версию реализовал так, чтобы выводы обоих версий всегда совпадали, за исключением обработки ошибок
-    data = [1, '2', 'jk', 3] #['1']
-    print('Good: ', good_funny_function(data))
+    data = [i for i in range(10000000)]
     print('Bad: ', isFunnyFunction(data))
+    print('Good: ', good_funny_function(data))
+    print('Fast: ', good_and_fast_funny_function(data))
