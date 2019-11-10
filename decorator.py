@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 
 
+import timeit
 import time
 
 
 def measure_time(method):
     def timed(*args, **kw):
-        ts = time.time()
+        ts = timeit.default_timer()
         result = None
         try:
             result = method(*args, **kw)
         except Exception:
             pass
         finally:
-            te = time.time()
-            print('%r затрачено %2.2f секунд' % \
+            te = timeit.default_timer()
+            print('%r затрачено %f секунд' % \
                   (method.__name__, te-ts))
             return result
 
