@@ -7,6 +7,7 @@ class Doer:
         self.whos_turn = 1
         self.cond_1_2 = Condition()
         self.cond_2_3 = Condition()
+        self.cond_3_1 = Condition()
 
     def _wait_for_turn(self, turn, condition):
         with condition:
@@ -20,6 +21,7 @@ class Doer:
             condition.notify()
 
     def first(self, action):
+        self._wait_for_turn(1, condition=self.cond_3_1)
         print('First')
         # Следующую строчку не убирать
         action()
@@ -37,7 +39,7 @@ class Doer:
         print('Third')
         # Следующую строчку не убирать
         action()
-        self.whos_turn = 1
+        self._let_go_next(turn=1, condition=self.cond_3_1)
 
 
 def action():
@@ -53,9 +55,19 @@ if __name__ == '__main__':
                       if '_' not in method_name and callable(getattr(doer, method_name))]
     for m in object_methods[::-1]:
         thread = Thread(target=getattr(doer, m), args=(action,))
-        thread.start()
         pool.append(thread)
         time.sleep(0.5)
     for t in pool:
+        t.start()
+    for t in pool:
         t.join()
+    pool.clear()
 
+    for m in object_methods:
+        thread = Thread(target=getattr(doer, m), args=(action,))
+        pool.append(thread)
+        time.sleep(0.5)
+    for t in pool:
+        t.start()
+    for t in pool:
+        t.join()
